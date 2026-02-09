@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --black:      #000000;
+    --dark:       #111111;
+    --gray-900:   #1a1a1a;
+    --gray-700:   #3a3a3a;
+    --gray-500:   #6a6a6a;
+    --gray-300:   #b0b0b0;
+    --gray-200:   #d4d4d4;
+    --gray-100:   #eeeeee;
+    --gray-50:    #f7f7f7;
+    --white:      #ffffff;
+    --radius:     6px;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--gray-50);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    color: var(--dark);
+}
+
+
+.container {
+    background: var(--white);
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    animation: cardEntry 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardEntry {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--black);
+    text-align: center;
+    letter-spacing: -0.3px;
+}
+
+.description {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-top: -0.4rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    color: var(--dark);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+input::placeholder {
+    color: var(--gray-300);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+#btnClick {
+    width: 100%;
+    padding: 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.2px;
+    color: var(--white);
+    background: var(--black);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+#btnClick::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#btnClick:hover {
+    background: var(--gray-900);
+}
+
+#btnClick:hover::after {
+    transform: scaleX(1);
+}
+
+#btnClick:active {
+    transform: scale(0.97);
+}
+
+#output:not(:empty) {
+    margin-top: 0.25rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    animation: fadeSlideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#output .msg {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    padding: 0.25rem 0;
+    font-weight: 500;
+    animation: msgReveal 0.3s ease both;
+}
+
+#output .msg:nth-child(1) { animation-delay: 0.05s; }
+#output .msg:nth-child(2) { animation-delay: 0.1s; }
+#output .msg:nth-child(3) { animation-delay: 0.15s; }
+#output .msg:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes msgReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#output .success {
+    color: var(--gray-700);
+}
+
+#output .info {
+    color: var(--black);
+    font-weight: 600;
+}
+
+#output .error {
+    color: var(--gray-500);
+}
+
+#output .greeting {
+    color: var(--black);
+    font-weight: 700;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 0.4rem;
+    padding-top: 0.5rem;
+}
+
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem 1.25rem;
+    }
+
+    #title {
+        font-size: 1.05rem;
+    }
+}
